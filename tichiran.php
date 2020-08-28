@@ -26,7 +26,7 @@ print '<form method="post" action="ticheck.php">';
 
 
 print '                     ';
-print 'ID　　タスク　　　担当　　　登録日';
+print 'ID　　タスク　　　担当　　　ステータス　　登録日';
 print '</br>';
 
 while(1)
@@ -37,6 +37,12 @@ while(1)
   {
    break;
   }
+//削除
+  if($rec['sakujo']=='1')
+  {
+  }
+  else
+  {
 //削除なし
   if($rec['sakujo']=='0')
      {
@@ -48,12 +54,35 @@ while(1)
      print $rec['userid'];
 //     $name = 'name';
      print '    ';
-     print $rec['insdate'];
-     print '     ';
-     print '</br>';
      }
+  if($rec['sakujo'] == "2")
+    {
+     print '   ';
+     print $rec['id'];
+     print '     ';
+     print $rec['name'];
+     print '     ';
+     print $rec['userid'];
+//     $name = 'name';
+
+      print '完了　　';
+    }
+
+  elseif($rec['enddate'] < date("y/m/d"))
+  {
+    print '期限切れ　';
+  }
+  else
+  {
+    print '進行中　　';
+  }
+  print $rec['insdate'];
+  print '     ';
+  print '</br>';
+}
 
 }
+
 
 print '</br>';
 

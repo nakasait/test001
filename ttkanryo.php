@@ -14,7 +14,7 @@ $dbh = new PDO($dsn,$user,$password);
 $dbh->query('SET NAMES UTF-8');
 
 $userid=$_POST['userid'];
-//$uname=$_POST['uname'];
+$uname=$_POST['uname'];
 //$name=$_POST['id'];
 $name=$_POST['name'];
 $view=$_POST['view'];
@@ -34,13 +34,20 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute();
 $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$sql= 'UPDATE tusk SET id=lpad(No,5,0) where userid=00000';
+$sql= 'UPDATE tusk SET id=lpad(No,5,0) where id=00000';
 $stmt = $dbh->prepare($sql);
 $stmt->execute();
 $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
 print 'タスク登録完了しました。<br/><br/>';
-print 'ID：';
+print 'ユーザーID：';
+print $userid;
+print '<br/>';
+print 'ユーザー名：';
+print $uname;
+print '<br/><br/>';
+
+print 'タスクID：';
 
 $sql = 'SELECT * FROM tusk ORDER BY No DESC LIMIT 1';
 foreach ($dbh->query($sql) as $row){

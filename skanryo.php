@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ユーザー変更</title>
+<title>ユーザー削除</title>
 </head>
 <body>
 
@@ -28,7 +28,18 @@ $userid=$_POST['userid'];
 //$stmt->execute();
 //$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
+$sql= 'SELECT * FROM user where userid="$userid"';
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+$rec = $stmt->fetch(PDO::FETCH_ASSOC);
+if($rec['sakujo']="1")
+{
+  print 'このユーザーは削除済みです。<br/><br/>';
+  print 'ID：';
+  print $userid;
+}
+else
+{
 $sql= 'UPDATE user SET sakujo="1" where userid="'.$userid.'"';
 $stmt = $dbh->prepare($sql);
 $stmt->execute();
@@ -38,17 +49,13 @@ $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 //foreach ($dbh->query($sql) as $row);
 
 print '<br/>' ;
-print 'ユーザー変更完了しました。<br/><br/>';
+print 'ユーザー削除完了しました。<br/><br/>';
 print 'ID：';
 print $userid;
 print '<br/>';
-//print 'ユーザー名：';
-//print $name;
 print '<br/>';
-//print '新パスワード：';
-//print $pass ;
 print '<br/>';
-
+}
 
 $dbh = null;
 

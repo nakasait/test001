@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ユーザー変更</title>
+<title>ユーザー削除</title>
 </head>
 <body>
 
@@ -42,17 +42,20 @@ else
 {
     print '</br>';
     print 'このユーザーを削除します。<br/>';
+    print '</br>';
     print 'ユーザーID：';
     print $userid ;
     print '</br>';
-    print 'ユーザー名：';
-//    print $sql = 'SELECT * FROM user WHERE userid="'.$userid.'"';
+//    print 'ユーザー名：';
+//    print $sql = 'SELECT * FROM user WHERE userid="$userid"';
 //    print 'foreach ($dbh->query($sql) as $row)';
-    print '</br>';
-//    print $row['name'];
-//print $sql= 'SELECT name FROM user WHERE userid="'.userid.'"';
-//print $stmt = $dbh->prepare($sql);
-//print $stmt->execute();
+//    print $sql= 'SELECT * FROM user where userid="'.$userid.'"';
+//    print $stmt = $dbh->prepare($sql);
+//    print $stmt->execute();
+//    print $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+
+//    print '</br>';
+//    print $rec['name'];
 
 //print while(1)
 //print {
@@ -69,7 +72,7 @@ else
     print ' ';
     print '<input type="hidden" name="userid" value="'.$userid.'">';
 //    print '<input type="hidden" name="name" value="'.$name.'">';
-    print '<input type="submit" value="変更">';
+    print '<input type="submit" value="削除">';
 }
 print '</form>';
 

@@ -13,17 +13,22 @@ $password = '';
 $dbh = new PDO($dsn,$user,$password);
 $dbh->query('SET NAMES UTF-8');
 
-$userid=$_POST['userid'];
-$uname=$_POST['uname'];
+//$userid=$_POST['userid'];
+//$uname=$_POST['uname'];
 
 print '<font color="0000ff" size="6">タスク登録</font>';
 
-//print 前画面からuserid,uname取得
+//print userid,uname取得
 
-print '　　　　　$userid  $uname';
+print '　　　　　';
+//print '"$userid"'  ;
+//print '"$uname"';
 print '<br/><br/>';
 
 print '<form method="post" action="ttcheck.php">';
+
+print 'ユーザーID　';
+print '<input name="userid" type="text" style="width:50px"><br/><br/>';
 
 print 'タスク名　';
 print '<input name="name" type="text" style="width:200px"><br/><br/>';

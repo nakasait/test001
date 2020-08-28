@@ -28,7 +28,7 @@ print '<input name="userid" type="text" style="width:50px"></br>';
 //print '<input type="hidden" name="userid" value="'.$userid.'">';
 //print 'ユーザー：';
 //print '</br>';
-//print '新パスワード：</br>';
+//print 'ユーザー：';
 
 print '</br>';
 print '<input type="submit" value="確認">';

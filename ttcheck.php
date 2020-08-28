@@ -15,7 +15,7 @@ $dbh = new PDO($dsn,$user,$password);
 $dbh->query('SET NAMES UTF-8');
 
 $userid=$_POST['userid'];
-$uname=$_POST['uname'];
+//$uname=$_POST['uname'];
 $name=$_POST['name'];
 $view=$_POST['view'];
 //$view2=$_POST['view2'];
@@ -35,9 +35,31 @@ $limitdate=$_POST['limitdate'];
 $i=0;
 print '<form method="post" action="ttkanryo.php">';
 
+if($userid==null)
+{
+    print 'ユーザーIDが入力されていません。<br/><br/>';
+    $i=1;
+}
+else
+{
+    print '<br/>';
+    print 'ユーザーID：';
+    print $userid ;
+    print '<br/><br/>';
+
+$sql = 'SELECT * FROM user where userid="'.$userid.'"';
+foreach ($dbh->query($sql) as $row)
+{
+//print $row['name'];
+}
+    print 'ユーザー名：';
+    print $row['name'];
+    $uname=$row['name'];
+    print '<br/>';
+}
 if($name==null)
 {
-    print 'タスク名が入力されていません。<br/>';
+    print 'タスク名が入力されていません。<br/><br/>';
     $i=1;
 }
 
@@ -72,7 +94,7 @@ elseif(isset($_POST['view'])=='個人')
 
 if($enddate=='')
 {
-    print '<br/>' ;
+//    print '<br/>' ;
     print '完了日が入力されていません。<br/>' ;
     $i=1;
 }
@@ -109,7 +131,6 @@ else
 //    print '<input type="hidden" name="id" value="'.$id.'">';
     print '<input type="hidden" name="name" value="'.$name.'">';
     print '<input type="hidden" name="view" value="'.$view.'">';
-//    print '<input type="hidden" name="view2" value="'.$view2.'">';
     print '<input type="hidden" name="enddate" value="'.$enddate.'">';
     print '<input type="hidden" name="limitdate" value="'.$limitdate.'">';
 
