@@ -17,9 +17,9 @@ $dbh->query('SET NAMES UTF-8');
 $name=$_POST['name'];
 $pass=$_POST['pass'];
 $name=$_POST['name'];
-$view=$_POST['view'];
-$enddate=$_POST['enddate'];
-$limitdate=$_POST['limitdate'];
+//$view=$_POST['view'];
+//$enddate=$_POST['enddate'];
+//$limitdate=$_POST['limitdate'];
 
 $name=htmlspecialchars($name);
 $pass=htmlspecialchars($pass);

@@ -14,7 +14,7 @@ $dbh = new PDO($dsn,$user,$password);
 $dbh->query('SET NAMES UTF-8');
 
 $userid=$_POST['userid'];
-$name=$_POST['name'];
+//$name=$_POST['name'];
 $pass=$_POST['pass'];
 //$name2=$_POST['name2'];
 //$pass2=$_POST['pass2'];
@@ -34,11 +34,11 @@ $stmt = $dbh->prepare($sql);
 $stmt->execute();
 $rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if($name!='')
-$sql= 'UPDATE user SET name="'.$name.'" where userid="'.$userid.'"';
-$stmt = $dbh->prepare($sql);
-$stmt->execute();
-$rec = $stmt->fetch(PDO::FETCH_ASSOC);
+//if($name!='')
+//$sql= 'UPDATE user SET name="'.$name.'" where userid="'.$userid.'"';
+//$stmt = $dbh->prepare($sql);
+//$stmt->execute();
+//$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
 //$sql = 'SELECT * FROM user where userid="$userid"';
 //foreach ($dbh->query($sql) as $row);
@@ -48,9 +48,9 @@ print 'パスワード変更完了しました。<br/><br/>';
 print 'ID：';
 print $userid;
 print '<br/>';
-print 'ユーザー名：';
-print $name;
-print '<br/>';
+//print 'ユーザー名：';
+//print $name;
+//print '<br/>';
 print '新パスワード：';
 print $pass ;
 print '<br/>';

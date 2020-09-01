@@ -27,6 +27,7 @@ $pass=$_POST['pass'];
 //$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
 print '<form method="post" action="index.html">';
+//print '<form method="post" action="index.html">';
 
 if($userid=='')
 {

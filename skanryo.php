@@ -28,12 +28,17 @@ $userid=$_POST['userid'];
 //$stmt->execute();
 //$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-$sql= 'SELECT * FROM user where userid="$userid"';
+$sql= 'SELECT * FROM user where userid="'.$userid.'"';
 $stmt = $dbh->prepare($sql);
 $stmt->execute();
 $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-if($rec['sakujo']="1")
+//foreach ($dbh->query($sql) as $row){}
+
+//print '<form method="post" >';
+
+if($rec['sakujo']=="1")
 {
+//  print $rec['sakujo'];
   print 'このユーザーは削除済みです。<br/><br/>';
   print 'ID：';
   print $userid;
@@ -56,6 +61,8 @@ print '<br/>';
 print '<br/>';
 print '<br/>';
 }
+
+//print '</form>';
 
 $dbh = null;
 

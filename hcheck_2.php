@@ -14,7 +14,7 @@ $dbh = new PDO($dsn,$user,$password);
 $dbh->query('SET NAMES UTF-8');
 
 $userid=$_POST['userid'];
-//$name=$_POST['name'];
+$name=$_POST['name'];
 $pass=$_POST['pass'];
 //$name2=$_POST['name2'];
 $pass2=$_POST['pass2'];
@@ -55,19 +55,37 @@ if($name=='')
 //パスワード一致☆
   if($pass==$pass2) 
   {
+//    print '<br/>';
+//    print 'ユーザー名：';
+//    print $name;
     print '<br/>';
     print '新パスワード：';
     print $pass;
-    $i=1;
     print '<br/><br/>';
-    print 'このユーザーを変更します。<br/><br/>';
-//    print '<form method="post" action="hkanryo.php">';
-    print '<input type="hidden" name="name" value="'.$name.'">';
-    print '<input type="hidden" name="pass" value="'.$pass.'">';
-    print '<input type="button" onclick="history.back()" value="戻る">';
-    print '  ';
-    print '<input type="submit" value="変更">';
-//    print '</form>';
+    $i=1;
+//*************************
+    $sql = 'SELECT * FROM user WHERE userid = "'.$userid.'"';
+    foreach ($dbh->query($sql) as $row)
+      {
+//    print $row['sakujo'];
+      }
+   
+      if($row['sakujo']=='1')
+      {
+        print '削除済みユーザーです。<br/><br/>'; 
+        print '<input type="button" onclick="history.back()" value="戻る">';
+      }
+//*************************
+      else
+        {
+        print '<br/><br/>';
+        print 'このユーザーを変更します。<br/><br/>';
+        print '<input type="hidden" name="name" value="'.$name.'">';
+        print '<input type="hidden" name="pass" value="'.$pass.'">';
+        print '<input type="button" onclick="history.back()" value="戻る">';
+        print '  ';
+        print '<input type="submit" value="変更">';
+        }
 
   }
 //パスワード一致しない
@@ -92,19 +110,34 @@ else
   if($pass==$pass2) 
   {
     print '<br/>';
-//    print '新ユーザー名：';
-//    print $name;
+    print '新ユーザー名：';
+    print $name;
     print '<br/><br/>';
     print '新パスワード：';
     print $pass;
     print '<br/><br/>';
+//*************************
+  $sql = 'SELECT * FROM user WHERE userid = "'.$userid.'"';
+  foreach ($dbh->query($sql) as $row)
+  {
+  //print $row['sakujo'];
+  }
+   
+  if($row['sakujo']=='1')
+  {
+    print '削除済みユーザーです。<br/><br/>'; 
+    print '<input type="button" onclick="history.back()" value="戻る">';
+  }
+//*************************
+  else
+  {
     print 'このユーザーを変更します。<br/><br/>';
 //    print '<form method="post" action="hkanryo.php">';
     print '<input type="button" onclick="history.back()" value="戻る">';
     print '  ';
     print '<input type="submit" value="変更">';
 //    print '</form>';
-
+   }
   }
 //パスワード不一致
   else
@@ -117,6 +150,7 @@ else
 //    print '</form>';
 
   }
+
 }
 
 print '<input type="hidden" name="userid" value="'.$userid.'">';

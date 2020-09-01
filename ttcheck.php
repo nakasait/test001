@@ -126,19 +126,18 @@ else
     print '<br/>' ;
     print 'このタスクを登録します。<br/>';
     print '<br/>' ;
-    print '<input type="hidden" name="userid" value="'.$userid.'">';
-    print '<input type="hidden" name="uname" value="'.$uname.'">';
-//    print '<input type="hidden" name="id" value="'.$id.'">';
-    print '<input type="hidden" name="name" value="'.$name.'">';
-    print '<input type="hidden" name="view" value="'.$view.'">';
-    print '<input type="hidden" name="enddate" value="'.$enddate.'">';
-    print '<input type="hidden" name="limitdate" value="'.$limitdate.'">';
-
     print '<input type="button" onclick="history.back()" value="戻る">';
     print '  ';
     print '<input type="submit" value="登録">';
 //    print '</form>';
 }
+print '<input type="hidden" name="userid" value="'.$userid.'">';
+print '<input type="hidden" name="uname" value="'.$uname.'">';
+//print '<input type="hidden" name="hid" value="'.$hid.'">';
+print '<input type="hidden" name="name" value="'.$name.'">';
+print '<input type="hidden" name="view" value="'.$view.'">';
+print '<input type="hidden" name="enddate" value="'.$enddate.'">';
+print '<input type="hidden" name="limitdate" value="'.$limitdate.'">';
 print '</form>';
 
 $dbh = null;
