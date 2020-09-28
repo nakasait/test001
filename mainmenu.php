@@ -1,5 +1,5 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE HTML>
+<html lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>タスク管理</title>
@@ -39,24 +39,24 @@ $errmessage='';
 print '<div class="container">';
 //print '<div class="mx-auto" style="...">';
 print '<div style="text-align:center">';
-print '<h1>ToDoリスト　メインメニュー</h1>';
+print '<h2>ToDoリスト　メインメニュー</h2>';
         if( $errmessage ){
           print '<div class="alert alert-danger" role="alert">';
-          print implode( '<br>', $errmessage );
+          print implode( '<br/>', $errmessage );
           print '</div>';
         }
 print '<form method="post">';
-print '<h2>処理を選択してください</h2>';
+print '<h3>処理を選択してください</h3>';
 print '<br/>';
 print '<form>';
-print '<h2>ユーザーID：';
+print '<h3>ユーザーID：';
 print $userid;
-print '</h2><br/>';
+print '</h3><br/>';
 //print 'ユーザー名：';
 //print $uname;
 print '</form>';
 
-print '<a href="./logout.php" class="text-danger"><h2>ログアウトする</h2></a><br/>';
+print '<a href="./logout.php" class="text-danger"><h3>ログアウトする</h3></a><br/>';
 
 print '</div>';
 print '</div>';
@@ -134,6 +134,40 @@ print '</div>';
 //print '<input type="hidden" name="pass" value="'.$pass.'">';
 print '</form><br/>';
 
+?>
+
+<style>
+.setsumei {
+  color: red;
+}
+</style>
+<div class="container">
+<div style="text-align:center">
+
+<div id="app">
+
+  <h3><button v-on:click="setsumei2">メールアドレスを変更・削除したい方</button></h3>
+  <h3><strong><p>{{ setsumei }}</p></strong></h3>
+
+</div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  var app = new Vue({
+      el: "#app",
+      data: {
+        setsumei: "↑　をクリック"
+      },
+      methods: {
+        setsumei2: function(e) {
+          this.setsumei = "アカウント管理者に依頼してください";
+        }
+      }
+ });
+</script>
+
+<?php
 print '<form method="post" action="kanrichk.php">';
 print '<div class="button">';
 print '<br/>';
@@ -147,8 +181,6 @@ print '</form><br/>';
 //print '<input type="hidden" name="uname" value="'.$uname.'">';
 print '</div>';
 print '</div>';
-
-$dbh = null;
 
 ?>
 </body>

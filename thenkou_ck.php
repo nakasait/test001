@@ -1,19 +1,25 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE HTML>
+<html lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 <title>タスク変更</title>
 </head>
-<body>
-<font color="0000ff" size="6">タスク変更対象</font><br/><br/>
+<body style="background-image: url(b1161.jpg);">
+<div style="text-align:center">
+<font color="000000" size="6">タスク変更対象</font><br/><br/>
+</div>
 
 <?php
+session_start();
 $dsn = 'mysql:dbname=todo;host=localhost';
 $user = 'root';
 $password = '';
 $dbh = new PDO($dsn,$user,$password);
 $dbh->query('SET NAMES UTF-8');
 
+$userid=$_POST['userid'];
+//$uname=$_POST['uname'];
 $hid=$_POST['hid'];
 //$name=$_POST['name'];
 $stat=$_POST['stat'];
@@ -29,17 +35,18 @@ $limitdate=$_POST['limitdate'];
 //$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
 print '<form method="post" action="thkanryo.php">';
-//print 'ユーザー：';
-//print $userid;
-//print '<br/>';
-print 'タスクID：';
-print $hid;
-print '　';
 $sql= 'SELECT * FROM tusk where id="'.$hid.'"';
 foreach ($dbh->query($sql) as $row){}
 
+print '<h4>　　　　　　　　　　ユーザー　：';
+print $row['userid'];
+print '<br/><br/>';
+print '<h4>　　　　　　　　　　タスクID　：';
+print $hid;
+print '</h4>';
+print '<h4>　　　　　　　　　　タスク名　：';
 print $row['name'];
-print '<br/>';
+print '</h4>';
 
 $p1='';
 $p2='';
@@ -51,15 +58,18 @@ if($stat=='')
 //（ステータスは元の値）
   $p1=$row['status'];
   print '</br>';
-  print 'ステータス：';
+  print '<h4>　　　　　　　　　　ステータス：';
   print $row['status'];
+  // print $stat;
   print '　';
-  if ($row['status']=='0')
-    print '進行中　';
-  if ($row['status']=='1')
-    print '完了　　';
-  if ($row['status']=='2')
-    print '期限切れ';
+  if ($row['status']=='0'){
+    print '進行中　';}
+  if ($row['status']=='1'){
+    print '完了　　';}
+  if ($row['status']=='2'){
+    print '期限切れ';}
+
+  print '</h4>';
 
 //  print '</br>';
 //  print '完了日　　：';
@@ -71,11 +81,19 @@ if($stat=='')
 //}
 //
 //完了日未入力→エラー
-  if($enddate=='')
+  if($enddate==" ")
   {
+    //print '<div style="text-align:center">';
     print '<br/>';
-    print '変更内容が入力されていません。<br/><br/>';
-    print '<input type="button" onclick="history.back()" value="戻る">';
+    //print '<h4>　　　　　　　　　　変更内容が入力されていません。<h4><br/><br/>';
+    //print '<input type="button" onclick="history.back()" value="戻る" class="btn btn-danger btn-lg">';
+    //print '</div>';
+    $p2=date("Y-m-d");
+    print '<br/>';
+    print '<h4>　　　　　　　　　　完了日2　　：';
+    print $p2;
+    print '</h4>';
+  
   }
 //完了日入力あり
 //完了日は入力値
@@ -84,42 +102,49 @@ if($stat=='')
   $p2=$enddate;
 //  print 'ステータス：';
 //  print $row['status'];
-  print '</br>';
-  print '完了日　　：';
+  print '<br/>';
+  print '<h4>　　　　　　　　　　完了日　　：';
   print $enddate;
-  print '</br>';
+  print '</h4>';
 //  print '完了期限　：';
 //  print $row['limitdate'];
-//  print '</br>';
+
 //  }
 //完了期限未入力
   if($limitdate=='')
 //（完了期限は元の値）
   {
     $p3=$row['limitdate'];
-    print '完了期限　：';
+    print '<h4>　　　　　　　　　　完了期限　：';
     print $row['limitdate'];
     print '<br/><br/>';
-    print 'このタスク情報を変更します。<br/><br/>';
-    print '<br/><br/>';
-    print '<input type="button" onclick="history.back()" value="戻る">';
+    print '　　　　　　　　　　このタスク情報を変更します。</h4><br/><br/>';
+//    print '<br/><br/>';
+print '<div class="container">';
+  print '<div style="text-align:center">';
+    print '<input type="button" onclick="history.back()" value="戻る" class="btn btn-danger btn-lg">';
     print '  ';
-    print '<input type="submit" value="変更">';
-  }
+    print '<input type="submit" value="変更" class="btn btn-primary btn-lg">';
+  print '</div>'; 
+print '</div>'; 
+      }
 //完了期限入力あり
 //完了期限入力値
   else
   {
   $p3=$limitdate;
-  print '完了期限　：';
+  print '<h4>　　　　　　　　　　完了期限　：';
   print $limitdate;
-  print '</br>';
   print '<br/><br/>';
-  print 'このタスク情報を変更します。<br/><br/>';
-  print '<br/><br/>';
-  print '<input type="button" onclick="history.back()" value="戻る">';
+  print '　　　　　　　　　　このタスク情報を変更します。</h4><br/><br/>';
+//  print '<br/><br/>';
+print '<div class="container">';
+  print '<div style="text-align:center">';
+  print '<input type="button" onclick="history.back()" value="戻る" class="btn btn-danger btn-lg">';
   print '  ';
-  print '<input type="submit" value="変更">';
+  print '<input type="submit" value="変更" class="btn btn-primary>';
+  print '</div>'; 
+print '</div>'; 
   }
   }
 
@@ -130,68 +155,80 @@ else
 //ステータスは入力値
   {
   $p1=$stat;
-  print '</br>';
-  print 'ステータス：';
-  print $stat;
-//  print $stat;
-  print '　';
-  if ($stat=='0')
-    print '進行中　';
-  if ($stat=='1')
-    print '完了　　';
-  if ($stat=='2')
-    print '期限切れ';
-
+//  print '</br>';
+  print '<h4>　　　　　　　　　　ステータス：';
+  //print $stat;
+//  print '　';
+  if ($stat=='0'){
+    print '進行中　';}
+  if ($stat=='1'){
+    print '完了　　';}
+  if ($stat=='2'){
+    print '期限切れ';}
+  print '</h4>';
 //  }
 //}
 //完了日未入力
   if($enddate=='')
-//完了日は元の値
+//完了日は元の値 完了ならば今日
   {
   $p2=$row['enddate'];
-  print '</br>';
-  print '完了日　　：';
-  print $row['enddate'];
+  print '<h4>　　　　　　　　　　完了日　　：';
+  if ($stat=='1')
+  {
+    $row['enddate']=date("Y-m-d");
   }
+  print $row['enddate'];
+  print '</h4>';
+  }
+  
 //完了日入力あり
 //完了日は入力値
   else
   {
   $p2=$enddate;
-  print '</br>';
-  print '完了日　　：';
+  //print '</br>';
+  print '<h4>　　　　　　　　　　完了日　　：';
   print $enddate;
-  print '</br>';
+  print '</h4>';
   }
 //完了期限未入力
   if($enddate=='')
 //完了期限は元の値
   {
   $p3=$row['limitdate'];
-  print '</br>';
-  print '完了期限　：';
+  //print '</br>';
+  print '<h4>　　　　　　　　　　完了期限　：';
   print $row['limitdate'];
   print '<br/><br/>';
-  print 'このタスク情報を変更します。<br/><br/>';
-  print '<br/><br/>';
-  print '<input type="button" onclick="history.back()" value="戻る">';
+  print '　　　　　　　　　　このタスク情報を変更します。</h4><br/><br/>';
+//  print '<br/><br/>';
+  print '<div class="container">';
+  print '<div style="text-align:center">';
+  print '<input type="button" onclick="history.back()" value="戻る" class="btn btn-danger btn-lg">';
   print '  ';
-  print '<input type="submit" value="変更">';
+  print '<input type="submit" value="変更" class="btn btn-primary btn-lg">';
+  print '</div>';
+  print '</div>';
   }
 //完了期限入力あり
 //完了期限は入力値
   else
   {
   $p3=$limitdate;
-  print '完了期限　：';
+  print '<h4>　　　　　　　　　　完了期限　：';
   print $limitdate;
   print '<br/><br/>';
-  print 'このタスク情報を変更します。<br/><br/>';
-  print '<br/><br/>';
-  print '<input type="button" onclick="history.back()" value="戻る">';
+  print '　　　　　　　　　　このタスク情報を変更します。<h4><br/><br/>';
+//  print '<br/><br/>';
+print '<div class="container">';
+  print '<div style="text-align:center">';
+  print '<input type="button" onclick="history.back()" value="戻る" class="btn btn-danger btn-lg">';
   print '  ';
-  print '<input type="submit" value="変更">';
-  }
+  print '<input type="submit" value="変更" class="btn btn-primary btn-lg">';
+  print '<div>';
+print '<div>';
+}
 }
 
   print '<br/><br/>';
@@ -200,7 +237,7 @@ else
 //$stmt->execute();
 //$rec = $stmt->fetch(PDO::FETCH_ASSOC);
 
-//print '<input type="hidden" name="userid" value="'.$userid.'">';
+print '<input type="hidden" name="userid" value="'.$userid.'">';
 //print '<input type="hidden" name="uname" value="'.$uname.'">';
 print '<input type="hidden" name="hid" value="'.$hid.'">';
 //print '<input type="hidden" name="name" value="'.$name.'">';
