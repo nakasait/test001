@@ -76,7 +76,7 @@ if ($row['status']=='0')
 
   if ($row['status']=='0')
     print '<th>進行中</th>';
-  if ($row['status']=='1'.'"</th>')
+  if ($row['status']=='1')
     print '<th>完了</th>';
   if ($row['status']=='2')
     print '<th>期限切れ</th>';
