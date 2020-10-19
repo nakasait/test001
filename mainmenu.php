@@ -23,6 +23,13 @@ $password = '';
 $dbh = new PDO($dsn,$user,$password);
 $dbh->query('SET NAMES UTF-8');
 
+$dbh->beginTransaction();
+
+//$sql= 'SELECT * from tusk where (status = "0") and (enddate < date("Y-m-d")) 0") and (sakujo = "0") LOCK IN SHARE MODE';
+//$stmt = $dbh->prepare($sql);
+//$stmt->execute();
+//$rec = $stmt->fetch(PDO::FETCH_ASSOC);
+
 
 //$userid=$_POST['userid'];
 $userid=$_SESSION['userid'];
@@ -30,6 +37,19 @@ $userid=$_SESSION['userid'];
 //$uname=$_POST['uname'];
 $errmessage='';
 //print '<font color="0000ff" size="6">ToDoリスト　タスク管理　メインメニュー</font><br/>';
+
+//SELECT CONVERT(date, getdate());
+$today = date("Y-m-d");
+
+print $today;
+
+//$sql= 'UPDATE tusk set status = "2" where status = "0" and enddate < "'.$today.'" and sakujo = "0" LOCK IN SHARE MODE';
+$sql= 'UPDATE tusk set status = "2" where status = "0" and enddate < "'.$today.'" and sakujo = "0"';
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+$rec = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$dbh->commit();
 
 //print '<style>';
 //print '<div style="text-align:center">';
@@ -182,6 +202,8 @@ print '</form><br/>';
 print '</div>';
 print '</div>';
 
+
+$dbh = null;
 ?>
 </body>
 </html>
