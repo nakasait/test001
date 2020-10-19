@@ -61,11 +61,11 @@ print '</h4></br>';
 print '</br>';
 print '<div class="container">';
   print '<div style="text-align:center">';
-  print '<input type="button" onclick="history.back()" value="戻る" class="btn print 
-  btn-danger btn-lg">';
-  print '　';
   print '<input type="submit" value="確認" class="btn btn-primary btn-lg">';
-  print '</div>';
+  print '　';
+//  print '<input type="button" onclick="history.back()" value="戻る" class="btn print   btn-danger btn-lg">';
+  print '<a button type="button" href="mainmenu.php" class="btn print btn-danger btn-lg">戻る</button></a>';
+print '</div>';
 print '</div>';
 
 //print '<input type="hidden" name="open" value="'.$open.'">';
